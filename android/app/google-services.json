@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "309661151565",
+    "project_id": "starparking-cidadao-android",
+    "storage_bucket": "starparking-cidadao-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309661151565:android:dc760fa416e6053607c704",
+        "android_client_info": {
+          "package_name": "com.example.star_parking_app_cidadao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309661151565-atd0cchhm2g19euf21vno9kd47k3ns83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADvaQZRqbvsaq8u31VtFj6373qkIWrNt8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309661151565-atd0cchhm2g19euf21vno9kd47k3ns83.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

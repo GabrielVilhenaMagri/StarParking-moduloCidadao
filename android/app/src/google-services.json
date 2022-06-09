@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "291474849498",
+    "firebase_url": "https://starparking-zona-azul-default-rtdb.firebaseio.com",
+    "project_id": "starparking-zona-azul",
+    "storage_bucket": "starparking-zona-azul.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291474849498:android:392c0f755f720a3ddd2fe3",
+        "android_client_info": {
+          "package_name": "com.example.star_parking_app_cidadao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291474849498-2lg628mjrk36diffr1b0u3950g8etf63.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.star_parking_app_cidadao",
+            "certificate_hash": "b780ea7f4999d1e73f22540895eee6dc9280014d"
+          }
+        },
+        {
+          "client_id": "291474849498-m7qtl44lb4gkoeetlurfkmoiokvnimv1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXVqxigOSmSI4GSbxuPBmWmEy_8nX4jWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291474849498-m7qtl44lb4gkoeetlurfkmoiokvnimv1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "291474849498-6hje53lfmphm0j9qa491cornfk8pu5pn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.starParkingAppCidadao"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291474849498:android:3a239c805a539961dd2fe3",
+        "android_client_info": {
+          "package_name": "com.example.starparkingzonaazul"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291474849498-m7qtl44lb4gkoeetlurfkmoiokvnimv1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXVqxigOSmSI4GSbxuPBmWmEy_8nX4jWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291474849498-m7qtl44lb4gkoeetlurfkmoiokvnimv1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "291474849498-6hje53lfmphm0j9qa491cornfk8pu5pn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.starParkingAppCidadao"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

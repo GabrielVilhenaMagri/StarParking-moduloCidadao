@@ -40,7 +40,7 @@ class HomePageButtonBuyTicket extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 14, right: 29, top: 10, bottom: 6),
+                    left: 14, right: 28, top: 10, bottom: 6),
                 child: Expanded(
                   child: Text("Comprar Ticket",
                       style: GoogleFonts.poppins(

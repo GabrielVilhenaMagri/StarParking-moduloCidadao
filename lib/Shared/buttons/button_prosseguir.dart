@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ButtonProsseguir extends StatelessWidget {
   final VoidCallback onTap;
-  const ButtonProsseguir({Key? key, required this.onTap}) : super(key: key);
+  const ButtonProsseguir({Key? key, required this.onTap,}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(

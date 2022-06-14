@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:star_parking_app_cidadao/Shared/themes/app_images.dart';
 
-import '../../Shared/buttons/button_finalizar.dart';
 import '../../Shared/buttons/button_retornar.dart';
 
 class ErroPage extends StatefulWidget{

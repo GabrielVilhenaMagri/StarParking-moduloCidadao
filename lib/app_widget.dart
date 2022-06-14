@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:star_parking_app_cidadao/modules/home/home_page.dart';
 import 'package:star_parking_app_cidadao/modules/splash/splash_page.dart';
-import 'Shared/model/usuario_model.dart';
+
 import 'Shared/themes/app_colors.dart';
-import 'Shared/usuario_tile_widget/usuario_tile.dart';
 import 'modules/buytickets/buy_tickets_page.dart';
 import 'modules/buytickets/cartão_page.dart';
 import 'modules/buytickets/erro_page.dart';
@@ -29,8 +28,6 @@ class AppWidget extends StatelessWidget {
         "/sucessopage": (context) => SucessoPage(),
         "/erropage": (context) => ErroPage(),
         "/pixpage": (context) => PixPage(),
-        "/usuario_tile": (context) => UsuarioTile(data:
-          UsuarioModel(placa: "ABC-4321", tempo: "3:00:00")),
       },
     );
   }

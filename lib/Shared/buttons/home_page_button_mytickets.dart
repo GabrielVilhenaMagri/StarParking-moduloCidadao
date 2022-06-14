@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:star_parking_app_cidadao/Shared/themes/app_images.dart';
-import 'package:star_parking_app_cidadao/Shared/themes/app_text_styles.dart';
 
 class HomePageButtonMyTickets extends StatelessWidget {
   final VoidCallback onTap;

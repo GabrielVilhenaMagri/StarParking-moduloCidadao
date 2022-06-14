@@ -1,38 +1,59 @@
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:star_parking_app_cidadao/Shared/buttons/button_cancelar.dart';
-
 import '../../Shared/buttons/button_prosseguir.dart';
-import '../../Shared/buttons/button_search.dart';
-import '../../Shared/buttons/radio_button_tempo.dart';
-import '../../Shared/label/label_sytle.dart';
 import '../../Shared/themes/app_colors.dart';
-import '../../Shared/themes/app_text_styles.dart';
-import 'controller_text.dart';
 
 class BuyTickets extends StatefulWidget {
   const BuyTickets({Key? key}) : super(key: key);
 
-
   @override
   _BuyTicketsState createState() => _BuyTicketsState();
 }
-enum Tempo { trintaMinutos, umaHora, duasHoras, tresHoras }
-enum Pagamento { pix, cartao}
+
+
+enum Pagamento { pix, cartao }
 
 class _BuyTicketsState extends State<BuyTickets> {
+  final formKey = GlobalKey<FormState>();
+  // final controller = InsertTextController();
+  CollectionReference functions = FirebaseFirestore.instance.collection("usuarios");
 
-  final controller = InsertTextController();
 
   final PlacaInputTextController = MaskedTextController(mask: "AAA-0000");
   final CpfInputTextController = MaskedTextController(mask: "000.000.000-00");
-  Tempo tempo = Tempo.trintaMinutos;
+
+  String generateRandomString(int len) {
+    var r = Random();
+    const _chars = '1234567890';
+    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
+  }
+
+
+  DateFormat dateFormat = DateFormat("HH:mm:ss");
+
+
+
+  String _tempo = "00:30:00";
   Pagamento pagamento = Pagamento.pix;
+
+
   @override
   Widget build(BuildContext context) {
+    String _name = '';
+    String string = dateFormat.format(DateTime.now().subtract(Duration(hours: 3)));
+
     final size = MediaQuery.of(context).size;
+
+
+
+
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
@@ -90,33 +111,34 @@ class _BuyTicketsState extends State<BuyTickets> {
                   padding: EdgeInsetsDirectional.fromSTEB(35, 62, 88, 7),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                        padding: EdgeInsets.only(left:40),
                         child: Expanded(
-                          child: Text("Placa do veículo",
-                              textAlign: TextAlign.left,
-                              style: GoogleFonts.poppins(
-                                fontSize: 13,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.black,
-                              )),
-                        ),
+                            child: Text("Placa",
+                                textAlign: TextAlign.left,
+                                style: GoogleFonts.poppins(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black,
+                                )),
+                          ),
                       ),
-                      Expanded(
-                          child: Text("CPF/CNPJ",
-                              textAlign: TextAlign.right,
-                              style: GoogleFonts.poppins(
-                                fontSize: 13,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.black,
-                              )))
+                         Padding(
+                           padding: EdgeInsets.only(left:186),
+                           child: Expanded(
+                              child: Text("CPF",
+                                  textAlign: TextAlign.right,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black,
+                                  ))),
+                         ),
                     ],
                   )),
               Form(
-                key: controller.formKey,
+                key: formKey,
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -148,16 +170,24 @@ class _BuyTicketsState extends State<BuyTickets> {
                             children: [
                               Expanded(
                                 child: Padding(
-                                    padding:
-                                        EdgeInsetsDirectional.fromSTEB(4, 9, 0, 0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        4, 9, 0, 0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(10,2,0,4),
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              10, 2, 0, 4),
                                       child: TextFormField(
-                                        validator: controller.validatePlaca,
+                                        validator: (text){
+                                          if(text == null || text.isEmpty){
+                                            return "Não pode ser vazio";
+                                          }
+                                          if(text.length < 7){
+                                            return "Campo incompleto";
+                                          }
+
+                                      },
+                                        onChanged: (text) => setState(() => _name = text),
                                         controller: PlacaInputTextController,
-                                        onChanged: (value){
-                                          controller.onChange(placa: value);
-                                        },
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           hintText: "ABC-1234",
@@ -173,15 +203,18 @@ class _BuyTicketsState extends State<BuyTickets> {
                                           ),
                                           enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: AppColors.corTransparente,
+                                                color:
+                                                    AppColors.corTransparente,
                                                 width: 2,
                                               ),
-                                              borderRadius: BorderRadius.circular(8)),
+                                              borderRadius:
+                                                  BorderRadius.circular(8)),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color: AppColors.corTransparente,
                                             ),
-                                            borderRadius: BorderRadius.circular(8),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                           ),
                                         ),
                                       ),
@@ -219,16 +252,24 @@ class _BuyTicketsState extends State<BuyTickets> {
                             children: [
                               Expanded(
                                 child: Padding(
-                                    padding:
-                                        EdgeInsetsDirectional.fromSTEB(4, 9, 0, 0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        4, 9, 0, 0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(10,2,0,4),
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              10, 2, 0, 4),
                                       child: TextFormField(
-                                        validator: controller.validateCpf,
-                                        controller: CpfInputTextController,
-                                        onChanged: (value){
-                                          controller.onChange(cpf: value);
+                                        validator: (text){
+                                          if(text == null || text.isEmpty){
+                                            return "Não pode ser vazio";
+                                          }
+                                          if(text.length < 11){
+                                            return "Campo incompleto";
+                                          }
+
                                         },
+                                        onChanged: (text) => setState(() => _name = text),
+                                        controller: CpfInputTextController,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           hintText: "123.456.789-00",
@@ -244,15 +285,18 @@ class _BuyTicketsState extends State<BuyTickets> {
                                           ),
                                           enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: AppColors.corTransparente,
+                                                color:
+                                                    AppColors.corTransparente,
                                                 width: 2,
                                               ),
-                                              borderRadius: BorderRadius.circular(8)),
+                                              borderRadius:
+                                                  BorderRadius.circular(8)),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color: AppColors.corTransparente,
                                             ),
-                                            borderRadius: BorderRadius.circular(8),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                           ),
                                         ),
                                       ),
@@ -287,43 +331,50 @@ class _BuyTicketsState extends State<BuyTickets> {
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 7, 0, 7),
                             child: Container(
-                              child: Column(children: [
-                                ListTile(
-                                    title: Text("30 min"),
-                                    leading: Radio(
-                                        value: Tempo.trintaMinutos,
-                                        groupValue: tempo,
-                                        onChanged: (value) {
-                                          controller.onChange(tempo: "0:30:00");
-                                          })
-                                        ),
-                                ListTile(
-                                    title: Text("1 hora"),
-                                    leading: Radio(
-                                        value: Tempo.umaHora,
-                                        groupValue: tempo,
-                                        onChanged: (value) {
-                                          controller.onChange(tempo: "1:00:00");
-                                        })),
-                                ListTile(
-                                    title: Text("2 horas"),
-                                    leading: Radio(
-                                        value: Tempo.duasHoras,
-                                        groupValue: tempo,
-                                        onChanged: (value) {
-                                          controller.onChange(tempo: "2:00:00");
-                                        })),
-                                ListTile(
-                                    title: Text("3 horas"),
-                                    leading: Radio(
-                                        value: Tempo.tresHoras,
-                                        groupValue: tempo,
-                                        onChanged: (value) {
-                                          controller.onChange(tempo: "3:00:00");
-                                        })),
-                              ],
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                      title: Text("30 min: (R\$ 12,00)"),
+                                      leading: Radio(
+                                          value: "00:30:00",
+                                          groupValue: _tempo,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              _tempo ="00:30:00";
+                                            });
+                                          })),
+                                  ListTile(
+                                      title: Text("1 hora  (R\$ 20,00)"),
+                                      leading: Radio(
+                                          value: "01:00:00",
+                                          groupValue: _tempo,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              _tempo = "01:00:00";
+                                            });
+                                          })),
+                                  ListTile(
+                                      title: Text("2 horas  (R\$ 27,00)"),
+                                      leading: Radio(
+                                          value: "02:00:00",
+                                          groupValue:  _tempo,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              _tempo = "02:00:00";
+                                            });
+                                          })),
+                                  ListTile(
+                                      title: Text("3 horas  (R\$ 32,00)"),
+                                      leading: Radio(
+                                          value: "03:00:00",
+                                          groupValue: _tempo,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              _tempo = "03:00:00";
+                                            });
+                                          })),
+                                ],
                               ),
-
                             ),
                           ),
                         ],
@@ -342,30 +393,29 @@ class _BuyTicketsState extends State<BuyTickets> {
                               height: 7,
                               thickness: 1,
                             ),
-                            Column(children: [
-                              ListTile(
-                                  title: Text("Pix"),
-                                  leading: Radio(
-                                      value: Pagamento.pix,
-                                      groupValue: pagamento,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          pagamento = Pagamento.pix;
-
-
-                                        });
-                                      })),
-                              ListTile(
-                                  title: Text("Cartão"),
-                                  leading: Radio(
-                                      value: Pagamento.cartao,
-                                      groupValue: pagamento,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          pagamento = Pagamento.cartao;
-                                        });
-                                      })),
-                            ],
+                            Column(
+                              children: [
+                                ListTile(
+                                    title: Text("Pix"),
+                                    leading: Radio(
+                                        value: Pagamento.pix,
+                                        groupValue: pagamento,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            pagamento = Pagamento.pix;
+                                          });
+                                        })),
+                                ListTile(
+                                    title: Text("Cartão"),
+                                    leading: Radio(
+                                        value: Pagamento.cartao,
+                                        groupValue: pagamento,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            pagamento = Pagamento.cartao;
+                                          });
+                                        })),
+                              ],
                             ),
                           ],
                         ),
@@ -388,15 +438,23 @@ class _BuyTicketsState extends State<BuyTickets> {
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(30, 40, 20, 20),
-                    child: ButtonProsseguir(onTap: () {
-                      final isValidForm = controller.formKey.currentState!.validate();
-                      if(isValidForm){
-                        if (pagamento.index == 0) {
-                          Navigator.pushNamed(context, "/pixpage");
-                        }else{
-                          Navigator.pushNamed(context, "/cartaopage");
+                    child: ButtonProsseguir(
+                      onTap: () async {
+                        final isValidForm =
+                            formKey.currentState!.validate();
+                        if (isValidForm) {
+                            await functions.add({
+                                  "placa": PlacaInputTextController.text,
+                                  "cpf": CpfInputTextController.text,
+                            "tempo": _tempo,
+                              "hora_comprada": string,
+                            "ticket": generateRandomString(5)});
+                          if (pagamento.index == 0) {
+                            Navigator.pushNamed(context, "/pixpage");
+                          } else {
+                            Navigator.pushNamed(context, "/cartaopage");
+                          }
                         }
-                      }
                       },
                     ),
                   ),

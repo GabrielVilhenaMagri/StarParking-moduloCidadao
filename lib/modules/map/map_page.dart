@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../Shared/buttons/button_search.dart';
+import '../../Shared/buttons/button_search_map.dart';
 import '../../Shared/buttons/buttonsheet_compra.dart';
 import '../../Shared/label/label_sytle.dart';
 import '../../Shared/themes/app_colors.dart';
@@ -124,7 +124,7 @@ class _MapState extends State<Map> {
                     ),
                     Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
-                        child: ButtonSearch(
+                        child: ButtonSearchMap(
                           onTap: () {
                             lat = -22.8340787;
                             long = -47.054842617;

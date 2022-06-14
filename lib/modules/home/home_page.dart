@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:star_parking_app_cidadao/Shared/buttons/home_page_button_buy_ticket.dart';
-import 'package:star_parking_app_cidadao/Shared/themes/app_colors.dart';
-import 'package:star_parking_app_cidadao/Shared/themes/app_images.dart';
+
 import '../../Shared/buttons/home_page_button_map.dart';
 import '../../Shared/buttons/home_page_button_mytickets.dart';
-import '../../Shared/themes/app_text_styles.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

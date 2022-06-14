@@ -2,18 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ButtonProsseguir extends StatelessWidget {
+
+class ButtonSearchMap extends StatelessWidget {
   final VoidCallback onTap;
-  const ButtonProsseguir({Key? key, required this.onTap}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
+  const ButtonSearchMap({Key? key, required this.onTap}) : super(key: key);
+
+@override
+Widget build(BuildContext context){
     return InkWell(
       onTap: onTap,
       child: Container(
         width: 100,
         height: 40,
         decoration: BoxDecoration(
-            color: Colors.green,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             boxShadow: [
               BoxShadow(
@@ -25,11 +27,11 @@ class ButtonProsseguir extends StatelessWidget {
             ]),
         child: Center(
           child: Container(
-            child: Text("Prosseguir",
+            child: Text("Procurar ",
                 style: GoogleFonts.poppins(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: Colors.white,
+                  color: Colors.black,
                 )),
           ),
         ),
@@ -37,3 +39,4 @@ class ButtonProsseguir extends StatelessWidget {
     );
   }
 }
+

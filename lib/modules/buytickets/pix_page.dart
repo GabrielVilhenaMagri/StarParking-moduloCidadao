@@ -1,12 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:star_parking_app_cidadao/Shared/themes/app_images.dart';
 
 import '../../Shared/buttons/button_cancelar.dart';
-import '../../Shared/buttons/button_finalizar.dart';
 import '../../Shared/buttons/button_prosseguir.dart';
 import '../../Shared/themes/app_colors.dart';
-import 'dart:math';
 
 class PixPage extends StatefulWidget{
   const PixPage ({Key? key}): super(key: key);
@@ -16,12 +15,13 @@ class PixPage extends StatefulWidget{
 
 }
 String generateRandomString(int len) {
-  var r = Random();
+  var r = Random.secure();
   const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
   return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
 }
 
 class _PixPageState extends State<PixPage>{
+  Random randomico =  Random();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,8 +120,13 @@ class _PixPageState extends State<PixPage>{
                       Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(30, 280, 20, 20),
                           child: ButtonProsseguir(onTap: () {
-                            Navigator.pushNamed(context, "/erropage");
-                          }))
+                            if (randomico.nextBool() == true) {
+                              Navigator.pushNamed(context, "/erropage");
+                            } else {
+                              Navigator.pushNamed(context, "/sucessopage");
+                            }
+                          })
+                              )
                     ],
                   ),
                 ],
